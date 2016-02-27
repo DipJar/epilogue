@@ -3,7 +3,7 @@
   "description": "Create REST resources and controllers with Sequelize and Express or Restify",
   "version": "0.6.5-dipjar",
   "author": "David Chester <dchester@shutterstock.com>",
-  "private": "true"
+  "private": "true",
   "contributors": [
     {
       "name": "Matt Broadstone",
