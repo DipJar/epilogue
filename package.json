@@ -1,8 +1,9 @@
 {
   "name": "epilogue",
   "description": "Create REST resources and controllers with Sequelize and Express or Restify",
-  "version": "0.6.5",
+  "version": "0.6.5-dipjar",
   "author": "David Chester <dchester@shutterstock.com>",
+  "private": "true"
   "contributors": [
     {
       "name": "Matt Broadstone",
@@ -18,10 +19,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dchester/epilogue.git"
+    "url": "https://github.com/DipJar/epilogue.git"
   },
   "bugs": {
-    "url": "https://github.com/dchester/epilogue/issues"
+    "url": "https://github.com/DipJar/epilogue/issues"
   },
   "license": "MIT",
   "keywords": [
