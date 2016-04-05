@@ -18,10 +18,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dchester/epilogue.git"
+    "url": "https://github.com/DipJar/epilogue.git"
   },
   "bugs": {
-    "url": "https://github.com/dchester/epilogue/issues"
+    "url": "https://github.com/DipJar/epilogue/issues"
   },
   "license": "MIT",
   "keywords": [
