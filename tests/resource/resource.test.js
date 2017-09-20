@@ -24,7 +24,14 @@ describe('Resource(basic)', function() {
     }, {
       underscored: true,
       timestamps: false,
-      hooks: {
+      scopes: {
+        userNameStartsWithA: {
+          where: {
+            username: { $like: 'a%' }
+          }
+        }
+      },
+       hooks: {
         beforeFind: function(options) {
           if (this.enableBrokenFindTest) {
             this.enableBrokenFindTest = false;
@@ -402,6 +409,25 @@ describe('Resource(basic)', function() {
       });
     });
 
+    it('should reload instance on update, excluding selected attrs', function(done) {
+      var userData = { username: 'arthur', email: 'jamez@gmail.com' };
+      request.post({
+        url: test.baseUrl + '/usersWithExclude',
+        json: userData
+      }, function(error, response, body) {
+        expect(error).is.null;
+        expect(response.headers.location).is.not.empty;
+       var path = response.headers.location;
+         request.put({
+          url: test.baseUrl + path,
+          json: { email: 'emma@fmail.co.uk' }
+        }, function(err, response, body) {
+          expect(response.statusCode).to.equal(200);
+          expect(body).to.eql({ id: 1, username: 'arthur' });
+          done();
+      });
+    });
+  });
   });
 
   describe('delete', function() {
@@ -671,6 +697,22 @@ describe('Resource(basic)', function() {
 
       return Promise.all(promises);
     });
+
+    it('should support scope to return a data subset', function(done) {
+      request.get({
+        url: test.baseUrl + '/users?scope=userNameStartsWithA'
+      }, function(err, response, body) {
+        expect(response.statusCode).to.equal(200);
+        var records = JSON.parse(body).map(function(r) { delete r.id; return r; });
+        expect(records).to.eql([
+          { username: 'arthur', email: 'arthur@gmail.com' },
+          { username: 'arthur', email: 'aaaaarthur@gmail.com' }
+        ]);
+        done();
+      });
+    });
+
+
 
   });
 
